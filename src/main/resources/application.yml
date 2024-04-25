@@ -1,1 +1,3 @@
-spring.application.name=app_spring_boot_fastfood_online
+spring:
+  profiles:
+    active: dev
