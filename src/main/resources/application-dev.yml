@@ -2,18 +2,37 @@ server:
   port: 80
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/fast_food_db;
+    url: jdbc:postgresql://localhost:5432/fast_food_db
     username: postgres
     password: Sobirov0717
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 'snurmuhammad85@gmail.com'
+    password: 'ydjdeuzztivhuvun'
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 app:
   admin:
     username: "Nurmukhammad"
     email: "snurmuhammad85@gmail.com"
+    contactNumber: "944310717"
     password: "Admin.123@"
+
+  jwt:
+    secretKey: "55d2430e17864da8db7h8dbd64a63777be5c1a7f06k92197c9b8113a3b552l60"
+    expireDays: 7
