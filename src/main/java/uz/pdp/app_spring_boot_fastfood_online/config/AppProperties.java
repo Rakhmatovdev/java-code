@@ -2,6 +2,7 @@ package uz.pdp.app_spring_boot_fastfood_online.config;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.Jar;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
