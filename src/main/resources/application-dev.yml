@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/fast_food_db
     username: postgres
-    password: Sobirov0717
+    password: 123
   jpa:
     hibernate:
       ddl-auto: update
