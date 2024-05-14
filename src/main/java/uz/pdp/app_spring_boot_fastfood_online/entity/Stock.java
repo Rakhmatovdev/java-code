@@ -1,9 +1,7 @@
 package uz.pdp.app_spring_boot_fastfood_online.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 import uz.pdp.app_spring_boot_fastfood_online.entity.templates.AbsLongEntity;
 
