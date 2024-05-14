@@ -1,6 +1,9 @@
 server:
   port: 80
 
+logging:
+  level.org.springframework.security=DEBUG
+
 spring:
   servlet:
     multipart:
@@ -32,6 +35,8 @@ app:
     email: "snurmuhammad85@gmail.com"
     contactNumber: "944310717"
     password: "Admin.123@"
+
+  fileLocation: /Users/nurmukhammadsobirov/IdeaProjects/app_spring_boot_fastfood_online/files
 
   jwt:
     secretKey: "55d2430e17864da8db7h8dbd64a63777be5c1a7f06k92197c9b8113a3b552l60"

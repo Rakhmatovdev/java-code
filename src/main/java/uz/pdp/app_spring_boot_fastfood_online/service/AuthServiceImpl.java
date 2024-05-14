@@ -122,6 +122,8 @@ public class AuthServiceImpl implements AuthService {
 
         String encodedPassword = passwordEncoder.encode(resetPasswordDTO.getNewPassword());
 
+        codeRepository.delete(codeEntity);
+
         user.setPassword(encodedPassword);
 
         return ApiResult.success("Password is changed");

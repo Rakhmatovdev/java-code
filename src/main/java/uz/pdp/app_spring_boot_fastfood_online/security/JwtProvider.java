@@ -17,14 +17,14 @@ public class JwtProvider {
 
     private final AppProperties properties;
 
-    public String generateToken(String contactNumber){
+    public String generateToken(String email){
 
         Integer expireDays = properties.getJwt().getExpireDays();
 
         Date expireDate = new Date(System.currentTimeMillis() + expireDays * 24 * 60 * 60 * 1000);
 
         return Jwts.builder()
-                .subject(contactNumber)
+                .subject(email)
                 .issuedAt(new Date())
                 .expiration(expireDate)
                 .signWith(getKey())
