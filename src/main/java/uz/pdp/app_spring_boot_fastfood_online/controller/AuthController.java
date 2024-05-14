@@ -18,7 +18,7 @@ public class AuthController {
     @PostMapping("/sign-up")
     public ApiResult<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
 
-        log.info("Request to sign-up params {}", signUpDTO);
+        log.info("Request to sign-up; params {}", signUpDTO);
         return authService.signUp(signUpDTO);
     }
 
