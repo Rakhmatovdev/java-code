@@ -24,7 +24,7 @@ public class AttachmentController {
     @PostMapping("/upload")
     public ApiResult<AttachmentDTO> upload(HttpServletRequest request) {
 
-        log.info("Request to attachment upload params {}", request.getParameterMap());
+        log.info("Request to attachment upload; params {}", request.getParameterMap());
         return attachmentService.upload(request);
     }
 
