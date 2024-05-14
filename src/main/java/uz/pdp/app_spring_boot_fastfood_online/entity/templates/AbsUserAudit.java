@@ -2,10 +2,12 @@ package uz.pdp.app_spring_boot_fastfood_online.entity.templates;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.UUID;
 
@@ -15,6 +17,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class AbsUserAudit {
 
     @CreatedBy

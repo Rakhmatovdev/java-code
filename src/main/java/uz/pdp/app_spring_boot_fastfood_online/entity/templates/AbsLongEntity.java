@@ -1,10 +1,8 @@
 package uz.pdp.app_spring_boot_fastfood_online.entity.templates;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 @AllArgsConstructor
@@ -13,6 +11,7 @@ import lombok.*;
 @Setter
 @ToString
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class AbsLongEntity extends AbsDateAudit {
 
     @Id

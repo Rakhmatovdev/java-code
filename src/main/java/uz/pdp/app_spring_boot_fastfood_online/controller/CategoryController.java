@@ -20,6 +20,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PostMapping
     public ApiResult<CategoryDTO> create(@RequestBody CategoryCrudDTO crudDTO) {
 

@@ -3,6 +3,7 @@ package uz.pdp.app_spring_boot_fastfood_online.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
 import uz.pdp.app_spring_boot_fastfood_online.payload.CourierCrudDTO;
@@ -20,6 +21,7 @@ public class CourierController {
 
     private final CourierService courierService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PostMapping("/create")
     public ApiResult<CourierDTO> create(CourierCrudDTO crudDTO){
         log.info("Request to courier controller create; params {}", crudDTO);
@@ -27,24 +29,28 @@ public class CourierController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("/getCouriers")
     public ApiResult<List<CourierDTO>> read(){
         log.info("Request to courier controller read method");
         return courierService.read();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("/getOne/{id}")
     public ApiResult<CourierDTO> getOne(@PathVariable Long id){
         log.info("Request to courier controller getOne; params: {}", id);
        return courierService.readOne(id);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PutMapping("/update/{id}")
     public ApiResult<CourierDTO> edit(@Valid CourierCrudDTO crudDTO, @PathVariable Long id){
         log.info("Request to courier controller update; params {}", crudDTO);
       return   courierService.update(id, crudDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @DeleteMapping("/delete/{id}")
     public ApiResult<String> delete(@PathVariable Long id){
         log.info("Request to courier controller delete; params: {}", id);

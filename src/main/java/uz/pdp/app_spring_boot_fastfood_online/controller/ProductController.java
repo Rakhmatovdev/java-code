@@ -2,6 +2,7 @@ package uz.pdp.app_spring_boot_fastfood_online.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ProductCrudDTO;
@@ -19,6 +20,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PostMapping
     public ApiResult<ProductDTO> create(@RequestBody ProductCrudDTO crudDTO) {
 
@@ -27,6 +29,7 @@ public class ProductController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping
     public ApiResult<List<ProductDTO>> readAll() {
 
@@ -35,6 +38,7 @@ public class ProductController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("{id}")
     public ApiResult<ProductDTO> readOne(@PathVariable Long id){
 
@@ -42,6 +46,7 @@ public class ProductController {
         return productService.readById(id);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PutMapping("{id}")
     public ApiResult<ProductDTO> update(@RequestBody ProductCrudDTO crudDTO, @PathVariable Long id) {
 
@@ -50,6 +55,8 @@ public class ProductController {
         return productService.update(id, crudDTO);
     }
 
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @DeleteMapping("{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 

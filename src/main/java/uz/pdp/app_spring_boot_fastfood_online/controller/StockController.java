@@ -2,6 +2,7 @@ package uz.pdp.app_spring_boot_fastfood_online.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
 import uz.pdp.app_spring_boot_fastfood_online.payload.StockCrudDTO;
@@ -19,6 +20,7 @@ public class StockController {
 
     private final StockService stockService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PostMapping
     public ApiResult<StockDTO> create(@RequestBody StockCrudDTO crudDTO) {
 
@@ -26,6 +28,7 @@ public class StockController {
         return stockService.create(crudDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping
     public ApiResult<List<StockDTO>> read() {
 
@@ -33,6 +36,7 @@ public class StockController {
         return stockService.read();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("{id}")
     public ApiResult<StockDTO> readOne(@PathVariable Long id) {
 
@@ -40,6 +44,7 @@ public class StockController {
         return stockService.readById(id);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PutMapping("{id}")
     public ApiResult<StockDTO> update(@PathVariable Long id, @RequestBody StockCrudDTO crudDTO) {
 
@@ -47,6 +52,7 @@ public class StockController {
         return stockService.update(id,crudDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @DeleteMapping("{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 

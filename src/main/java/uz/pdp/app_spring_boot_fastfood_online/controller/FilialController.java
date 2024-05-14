@@ -3,6 +3,7 @@ package uz.pdp.app_spring_boot_fastfood_online.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
 import uz.pdp.app_spring_boot_fastfood_online.payload.FilialCrudDTO;
@@ -20,30 +21,35 @@ public class FilialController {
 
     private final FilialService filialService;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("/read")
     public ApiResult<List<FilialDTO>> read(){
         log.info("Request to courier controller read");
         return filialService.read();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("/readOne/{id}")
     public ApiResult<FilialDTO> readOne(@PathVariable Long id){
-        log.info("Request to courier controller with id: {}", id);
+        log.info("Request to courier controller readOne; id: {}", id);
         return filialService.readOne(id);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PostMapping("/create")
     public ApiResult<FilialDTO> create(@Valid @RequestBody FilialCrudDTO crudDTO){
         log.info("Request to courier controller {}", crudDTO);
         return filialService.create(crudDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @PutMapping("/update/{id}")
     public ApiResult<FilialDTO> update(@PathVariable Long id, @RequestBody FilialCrudDTO crudDTO){
         log.info("Request to courier controller with id: {}", id);
         return filialService.edit(id, crudDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @DeleteMapping("/delete/{id}")
     public ApiResult<String> delete(@PathVariable Long id){
         log.info("Request to courier controller with id: {}", id);
