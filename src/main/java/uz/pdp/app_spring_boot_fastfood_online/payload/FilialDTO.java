@@ -1,7 +1,5 @@
 package uz.pdp.app_spring_boot_fastfood_online.payload;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

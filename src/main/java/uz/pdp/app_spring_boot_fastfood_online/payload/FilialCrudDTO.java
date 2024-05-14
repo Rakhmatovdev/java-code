@@ -1,6 +1,6 @@
 package uz.pdp.app_spring_boot_fastfood_online.payload;
 
-import jakarta.persistence.Column;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

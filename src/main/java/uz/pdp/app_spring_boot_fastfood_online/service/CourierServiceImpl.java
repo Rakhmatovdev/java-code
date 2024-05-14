@@ -1,7 +1,6 @@
 package uz.pdp.app_spring_boot_fastfood_online.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.service.RequestBodyService;
 import org.springframework.stereotype.Service;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Courier;
 import uz.pdp.app_spring_boot_fastfood_online.exception.RestException;
@@ -22,7 +21,7 @@ public class CourierServiceImpl implements CourierService{
     private final CourierRepository courierRepository;
 
     private final CourierMapper courierMapper;
-    private final RequestBodyService requestBodyBuilder;
+
 
     @Override
     public ApiResult<CourierDTO> create(CourierCrudDTO crudDTO) {
@@ -55,7 +54,7 @@ public class CourierServiceImpl implements CourierService{
 
         List<Courier> couriers = courierRepository.findAll();
         List<CourierDTO> courierDTOS = couriers.stream()
-                .map(courier -> courierMapper.toDTO(courier))
+                .map(courierMapper::toDTO)
                 .collect(Collectors.toList());
 
         return ApiResult.success(courierDTOS);
@@ -68,9 +67,7 @@ public class CourierServiceImpl implements CourierService{
                 .orElseThrow(() -> RestException.notFound("Courier with id " + id));
 
         courierRepository.delete(courier);
-        CourierDTO courierDTO = courierMapper.toDTO(courier);
-        String send = "Courier is deleted";
-        return ApiResult.success(send);
+        return ApiResult.success("Courier is deleted");
 
     }
 

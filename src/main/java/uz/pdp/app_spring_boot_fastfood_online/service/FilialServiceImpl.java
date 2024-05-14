@@ -51,7 +51,7 @@ public class FilialServiceImpl implements FilialService {
     public ApiResult<List<FilialDTO>> read() {
         List<Filial> filials = filialRepository.findAll();
         List<FilialDTO> filialsDTO = filials.stream()
-                .map(filial -> filialMapper.toDTO(filial))
+                .map(filialMapper::toDTO)
                 .collect(Collectors.toList());
 
         return ApiResult.success(filialsDTO);
