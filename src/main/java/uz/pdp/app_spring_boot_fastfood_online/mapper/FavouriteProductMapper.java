@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface FavouriteProductMapper {
 
-    FavouriteProductDTO toDto(FavouriteProduct stock);
+    FavouriteProductDTO toDto(FavouriteProduct favouriteProduct);
 
     FavouriteProduct toEntity(FavouriteProductCrudDTO crudDTO);
 

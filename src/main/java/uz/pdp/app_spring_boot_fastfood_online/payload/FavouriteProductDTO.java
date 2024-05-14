@@ -15,6 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class FavouriteProductDTO implements Serializable {
     private Long id;
-    private Long user;
-    private Long product;
+    private Long userId;
+    private Long productId;
 }
