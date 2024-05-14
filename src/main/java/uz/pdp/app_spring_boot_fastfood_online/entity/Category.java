@@ -1,6 +1,7 @@
 package uz.pdp.app_spring_boot_fastfood_online.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import uz.pdp.app_spring_boot_fastfood_online.entity.templates.AbsLongEntity;
 
@@ -10,12 +11,12 @@ import uz.pdp.app_spring_boot_fastfood_online.entity.templates.AbsLongEntity;
 @Setter
 @ToString
 @Entity
-public class CodeEntity extends AbsLongEntity {
+public class Category extends AbsLongEntity {
 
 
-    private String email;
+    private String name;
 
-
-    private Integer code;
+    @ManyToOne
+    private Category parentCategory;
 
 }

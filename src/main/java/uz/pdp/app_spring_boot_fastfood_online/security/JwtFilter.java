@@ -33,14 +33,14 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-
+        checkAuth(request, response);
         filterChain.doFilter(request,response);
     }
 
     private void checkAuth(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        //Bearer ey...
+
         if (Objects.isNull(authHeader))
             return;
 

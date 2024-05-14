@@ -51,6 +51,16 @@ public class User extends AbsLongEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority(Role+role.name()));    }
 
     @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
