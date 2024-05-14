@@ -1,7 +1,6 @@
 package uz.pdp.app_spring_boot_fastfood_online.controller;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class CourierController {
 
     @PostMapping("/create")
     public ApiResult<CourierDTO> create(CourierCrudDTO crudDTO){
-        log.info("Request to courier controller {}", crudDTO);
+        log.info("Request to courier controller create; params {}", crudDTO);
         return  courierService.create(crudDTO);
     }
 
@@ -36,19 +35,19 @@ public class CourierController {
 
     @GetMapping("/getOne/{id}")
     public ApiResult<CourierDTO> getOne(@PathVariable Long id){
-        log.info("Request to courier controller id: {}", id);
+        log.info("Request to courier controller getOne; params: {}", id);
        return courierService.readOne(id);
     }
 
     @PutMapping("/update/{id}")
     public ApiResult<CourierDTO> edit(@Valid CourierCrudDTO crudDTO, @PathVariable Long id){
-        log.info("Request to courier controller {}", crudDTO);
+        log.info("Request to courier controller update; params {}", crudDTO);
       return   courierService.update(id, crudDTO);
     }
 
     @DeleteMapping("/delete/{id}")
     public ApiResult<String> delete(@PathVariable Long id){
-        log.info("Request to courier controller with id: {}", id);
+        log.info("Request to courier controller delete; params: {}", id);
         return courierService.delete(id);
     }
 }
