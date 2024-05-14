@@ -43,7 +43,7 @@ public class FavouriteProductServiceImpl implements FavouriteProductService{
 
         FavouriteProduct save = favouriteProductRepository.save(entity);
 
-        return ApiResult.success(favouriteProductMapper.toDto(entity));
+        return ApiResult.success(favouriteProductMapper.toDto(save));
     }
 
     @Override
@@ -82,7 +82,7 @@ public class FavouriteProductServiceImpl implements FavouriteProductService{
 
         FavouriteProduct save = favouriteProductRepository.save(favouriteProduct);
 
-        return ApiResult.success(favouriteProductMapper.toDto(favouriteProduct));
+        return ApiResult.success(favouriteProductMapper.toDto(save));
     }
 
     @Override
