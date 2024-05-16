@@ -29,7 +29,6 @@ public class ProductController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping
     public ApiResult<List<ProductDTO>> readAll() {
 
@@ -38,7 +37,6 @@ public class ProductController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("{id}")
     public ApiResult<ProductDTO> readOne(@PathVariable Long id){
 
@@ -62,6 +60,13 @@ public class ProductController {
 
         log.info("Request to ProductController delete; params: {}", id);
         return productService.delete(id);
+    }
+
+    @GetMapping("/products-with-stock")
+    public ApiResult<List<ProductDTO>> readAllProductsWithStock() {
+
+        log.info("Request to ProductController readAllProductsWithStock");
+        return productService.readAllProductsWithStock();
     }
 
 

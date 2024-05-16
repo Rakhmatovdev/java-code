@@ -20,4 +20,6 @@ public class ProductDTO implements Serializable {
     private Double price;
     private Long attachmentId;
     private Long categoryId;
+    private Double priceWithStock;
+
 }

@@ -21,36 +21,34 @@ public class FilialController {
 
     private final FilialService filialService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("/read")
+    @GetMapping
     public ApiResult<List<FilialDTO>> read(){
         log.info("Request to courier controller read");
         return filialService.read();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("/readOne/{id}")
+    @GetMapping("{id}")
     public ApiResult<FilialDTO> readOne(@PathVariable Long id){
         log.info("Request to courier controller readOne; id: {}", id);
         return filialService.readOne(id);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PostMapping("/create")
+    @PostMapping
     public ApiResult<FilialDTO> create(@Valid @RequestBody FilialCrudDTO crudDTO){
         log.info("Request to courier controller {}", crudDTO);
         return filialService.create(crudDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("/update/{id}")
+    @PutMapping("{id}")
     public ApiResult<FilialDTO> update(@PathVariable Long id, @RequestBody FilialCrudDTO crudDTO){
         log.info("Request to courier controller with id: {}", id);
         return filialService.edit(id, crudDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ApiResult<String> delete(@PathVariable Long id){
         log.info("Request to courier controller with id: {}", id);
         return filialService.delete(id);

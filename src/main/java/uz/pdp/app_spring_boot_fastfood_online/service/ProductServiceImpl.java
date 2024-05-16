@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Attachment;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Category;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Product;
+import uz.pdp.app_spring_boot_fastfood_online.entity.Stock;
 import uz.pdp.app_spring_boot_fastfood_online.exception.RestException;
 import uz.pdp.app_spring_boot_fastfood_online.mapper.ProductMapper;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
@@ -13,7 +14,9 @@ import uz.pdp.app_spring_boot_fastfood_online.payload.ProductDTO;
 import uz.pdp.app_spring_boot_fastfood_online.repository.AttachmentRepository;
 import uz.pdp.app_spring_boot_fastfood_online.repository.CategoryRepository;
 import uz.pdp.app_spring_boot_fastfood_online.repository.ProductRepository;
+import uz.pdp.app_spring_boot_fastfood_online.repository.StockRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +28,7 @@ public class ProductServiceImpl implements ProductService{
     private final ProductMapper productMapper;
     private final AttachmentRepository attachmentRepository;
     private final CategoryRepository categoryRepository;
+    private final StockRepository stockRepository;
 
     @Override
     public ApiResult<ProductDTO> create(ProductCrudDTO crudDTO) {
@@ -39,6 +43,7 @@ public class ProductServiceImpl implements ProductService{
 
         entity.setCategory(category);
         entity.setAttachment(attachment);
+        entity.setPriceWithStock(null);
 
         Product save = productRepository.save(entity);
 
@@ -75,5 +80,21 @@ public class ProductServiceImpl implements ProductService{
 
         productRepository.deleteById(id);
         return ApiResult.success("Product is deleted ");
+    }
+
+    @Override
+    public ApiResult<List<ProductDTO>> readAllProductsWithStock() {
+
+        Date now = new Date();
+
+        List<Stock> allActiveStocks = stockRepository.findAllActiveStocks(now);
+
+        if(allActiveStocks.isEmpty()){
+            throw RestException.restThrow("There is no any active stocks right now");
+        }
+
+        List<Product> productsWithStuck = productRepository.findAllByPriceWithStockIsNotNull();
+
+        return ApiResult.success(productMapper.toDto(productsWithStuck));
     }
 }

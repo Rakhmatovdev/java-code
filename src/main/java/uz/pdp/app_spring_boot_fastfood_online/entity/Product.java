@@ -27,5 +27,7 @@ public class Product extends AbsLongEntity {
     @ManyToOne
     private Category category;
 
+    private Double priceWithStock;
+
 
 }

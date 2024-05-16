@@ -18,4 +18,6 @@ public interface ProductService {
 
     ApiResult<String> delete(Long id);
 
+    ApiResult<List<ProductDTO>> readAllProductsWithStock();
+
 }
