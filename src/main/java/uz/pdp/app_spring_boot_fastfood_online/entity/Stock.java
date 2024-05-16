@@ -2,6 +2,8 @@ package uz.pdp.app_spring_boot_fastfood_online.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.*;
 import uz.pdp.app_spring_boot_fastfood_online.entity.templates.AbsLongEntity;
 
@@ -21,8 +23,10 @@ public class Stock extends AbsLongEntity {
 
     private Double discount_amount;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date beginsAt;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endsAt;
 
 

@@ -1,6 +1,7 @@
 package uz.pdp.app_spring_boot_fastfood_online.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Product;
 import uz.pdp.app_spring_boot_fastfood_online.entity.Stock;
@@ -12,6 +13,8 @@ import uz.pdp.app_spring_boot_fastfood_online.payload.StockDTO;
 import uz.pdp.app_spring_boot_fastfood_online.repository.ProductRepository;
 import uz.pdp.app_spring_boot_fastfood_online.repository.StockRepository;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,6 +39,8 @@ public class StockServiceImpl implements StockService {
 
         return ApiResult.success(stockMapper.toDto(save));
     }
+
+
 
     @Override
     public ApiResult<StockDTO> readById(Long id) {
@@ -66,7 +71,9 @@ public class StockServiceImpl implements StockService {
 
         stock.setProducts(products);
 
-        return ApiResult.success(stockMapper.toDto(stock));
+        Stock save = stockRepository.save(stock);
+
+        return ApiResult.success(stockMapper.toDto(save));
     }
 
     @Override
@@ -76,4 +83,58 @@ public class StockServiceImpl implements StockService {
 
         return ApiResult.success("Stock is deleted ");
     }
+
+
+    public void setProductStockPrice( Stock stock) {
+
+        List<Product> updatedProducts = new ArrayList<>();
+
+        List<Product> products = stock.getProducts();
+
+        for (Product product : products) {
+            product.setPriceWithStock(
+                    product.getPrice() - stock.getDiscount_amount()
+            );
+            updatedProducts.add(product);
+        }
+
+        productRepository.saveAll(updatedProducts);
+
+    }
+
+    public void removeProductStockPrice( Stock stock) {
+
+        List<Product> updatedProducts = new ArrayList<>();
+
+        List<Product> products = stock.getProducts();
+
+        for (Product product : products) {
+            product.setPriceWithStock(null);
+            updatedProducts.add(product);
+        }
+
+        productRepository.saveAll(updatedProducts);
+    }
+
+    public List<Stock> findActiveStocks(Date now) {
+
+        return stockRepository.findAllActiveStocks(now);
+    }
+
+    // This method runs every hour
+    @Scheduled(fixedRate = 360000)
+    public void checkAndApplyDiscounts() {
+        Date now = new Date();
+
+        List<Stock> activeStocks = findActiveStocks(now);
+
+        for (Stock stock : activeStocks) {
+            if (now.after(stock.getBeginsAt()) && now.before(stock.getEndsAt())) {
+                setProductStockPrice(stock);
+            } else if (now.after(stock.getEndsAt())) {
+                removeProductStockPrice(stock);
+            }
+        }
+    }
+
 }
