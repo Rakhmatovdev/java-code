@@ -10,7 +10,6 @@ import java.util.Optional;
 @Repository
 public interface BasketRepository extends JpaRepository<Basket, Long> {
 
-    Optional <Basket> findByUserAndIsClosedFalse(User user);
     Optional<Basket> findByUserIdAndIsClosedFalse(Long user_id);
 
 }

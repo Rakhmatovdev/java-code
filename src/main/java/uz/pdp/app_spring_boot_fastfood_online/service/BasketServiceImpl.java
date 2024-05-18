@@ -24,9 +24,6 @@ public class BasketServiceImpl implements BasketService {
 
     private final BasketMapper basketMapper;
 
-    private final UserRepository userRepository;
-
-    private final FilialMapper filialMapper;
 
     @Override
     public ApiResult<BasketDTO> create(User user) {
