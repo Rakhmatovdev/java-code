@@ -16,9 +16,13 @@ public class BasketProduct extends AbsLongEntity {
     @ManyToOne
     private Product product;
 
+    private String productName;
+
+    private Double buyingPrice;
+
     @ManyToOne
     private Basket basket;
 
-    private int quantity = 0;
+    private int quantity = 1;
 
 }

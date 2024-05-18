@@ -37,7 +37,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResult<ProductDTO> readOne(@PathVariable Long id){
 
         log.info("Request to ProductController readOne; params: {}", id);
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ApiResult<ProductDTO> update(@RequestBody ProductCrudDTO crudDTO, @PathVariable Long id) {
 
         log.info("Request to ProductController update; params: {}, {}", id, crudDTO);
@@ -55,7 +55,7 @@ public class ProductController {
 
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 
         log.info("Request to ProductController delete; params: {}", id);

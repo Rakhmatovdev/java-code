@@ -33,7 +33,7 @@ public class FavouriteProductController {
         return favouriteProductService.read();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResult<FavouriteProductDTO> readOne(@PathVariable Long id){
 
         log.info("Request to FavouriteProductController readOne; params: {}", id);
@@ -41,7 +41,7 @@ public class FavouriteProductController {
     }
 
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ApiResult<FavouriteProductDTO> update(@RequestBody FavouriteProductCrudDTO crudDTO, @PathVariable Long id) {
 
         log.info("Request to FavouriteProductController update; params: {}, {}", id, crudDTO);
@@ -50,7 +50,7 @@ public class FavouriteProductController {
     }
 
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 
         log.info("Request to FavouriteProductController delete; params: {}", id);

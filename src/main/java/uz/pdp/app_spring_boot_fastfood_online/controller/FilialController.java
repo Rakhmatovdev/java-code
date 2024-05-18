@@ -27,7 +27,7 @@ public class FilialController {
         return filialService.read();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResult<FilialDTO> readOne(@PathVariable Long id){
         log.info("Request to courier controller readOne; id: {}", id);
         return filialService.readOne(id);
@@ -41,14 +41,14 @@ public class FilialController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ApiResult<FilialDTO> update(@PathVariable Long id, @RequestBody FilialCrudDTO crudDTO){
         log.info("Request to courier controller with id: {}", id);
         return filialService.edit(id, crudDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ApiResult<String> delete(@PathVariable Long id){
         log.info("Request to courier controller with id: {}", id);
         return filialService.delete(id);
