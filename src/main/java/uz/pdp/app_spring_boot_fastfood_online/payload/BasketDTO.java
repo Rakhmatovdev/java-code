@@ -15,6 +15,6 @@ public class BasketDTO {
 
     private Long userId;
 
-    private Boolean isColesd;
+    private Boolean isClosed;
 
 }

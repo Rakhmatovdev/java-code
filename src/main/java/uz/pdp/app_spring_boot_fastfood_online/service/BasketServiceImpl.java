@@ -6,12 +6,10 @@ import uz.pdp.app_spring_boot_fastfood_online.entity.Basket;
 import uz.pdp.app_spring_boot_fastfood_online.entity.User;
 import uz.pdp.app_spring_boot_fastfood_online.exception.RestException;
 import uz.pdp.app_spring_boot_fastfood_online.mapper.BasketMapper;
-import uz.pdp.app_spring_boot_fastfood_online.mapper.FilialMapper;
 import uz.pdp.app_spring_boot_fastfood_online.payload.ApiResult;
 import uz.pdp.app_spring_boot_fastfood_online.payload.BasketCrudDTO;
 import uz.pdp.app_spring_boot_fastfood_online.payload.BasketDTO;
 import uz.pdp.app_spring_boot_fastfood_online.repository.BasketRepository;
-import uz.pdp.app_spring_boot_fastfood_online.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,4 +76,6 @@ public class BasketServiceImpl implements BasketService {
 
         return ApiResult.success(basketMapper.toDto(basket));
     }
+
+
 }

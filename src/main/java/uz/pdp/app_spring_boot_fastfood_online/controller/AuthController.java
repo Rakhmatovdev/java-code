@@ -44,7 +44,7 @@ public class AuthController {
         return authService.forgotPassword(email);
     }
 
-    @PostMapping("reset-password")
+    @PostMapping("/reset-password")
     public ApiResult<String> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
 
         log.info("Request to reset-password params {}", resetPasswordDTO);

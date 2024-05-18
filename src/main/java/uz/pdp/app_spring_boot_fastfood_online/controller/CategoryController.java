@@ -28,7 +28,6 @@ public class CategoryController {
         return categoryService.create(crudDTO);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping
     public ApiResult<List<CategoryDTO>> readAll() {
 
@@ -36,16 +35,15 @@ public class CategoryController {
         return categoryService.read();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResult<CategoryDTO> readOne(@PathVariable Long id){
 
         log.info("Request to CategoryController readOne; params: {}", id);
         return categoryService.readById(id);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("{id}")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
+    @PutMapping("/{id}")
     public ApiResult<CategoryDTO> update(@RequestBody CategoryCrudDTO crudDTO, @PathVariable Long id) {
 
         log.info("Request to CategoryController update; params: {}, {}", id, crudDTO);
@@ -54,7 +52,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 
         log.info("Request to CategoryController delete; params: {}", id);

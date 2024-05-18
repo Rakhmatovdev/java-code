@@ -31,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final CodeEntityRepository codeRepository;
+    private final BasketService basketService;
 
 
     @Override
@@ -50,6 +51,8 @@ public class AuthServiceImpl implements AuthService {
             throw new RestException("Bad credentials");
 
         String token = jwtProvider.generateToken(signInDTO.getEmail());
+
+        basketService.create(user);
 
         return ApiResult.success(new TokenDTO(token));
     }

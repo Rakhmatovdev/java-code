@@ -37,7 +37,7 @@ public class StockController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ApiResult<StockDTO> readOne(@PathVariable Long id) {
 
         log.info("Request to StockController readOne; params {}", id);
@@ -45,7 +45,7 @@ public class StockController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ApiResult<StockDTO> update(@PathVariable Long id, @RequestBody StockCrudDTO crudDTO) {
 
         log.info("Request to StockController update; params {},{}",id, crudDTO);
@@ -53,7 +53,7 @@ public class StockController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ApiResult<String> delete(@PathVariable Long id) {
 
         log.info("Request to StockController delete; params {}",id);

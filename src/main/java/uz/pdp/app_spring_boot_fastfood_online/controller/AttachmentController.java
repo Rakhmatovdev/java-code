@@ -31,7 +31,7 @@ public class AttachmentController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PostMapping("/download{id}")
+    @PostMapping("/download/{id}")
     public void download(HttpServletResponse response, @PathVariable Long id) {
 
         log.info("Request to attachment download ");
