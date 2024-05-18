@@ -15,5 +15,4 @@ public class ResetPasswordDTO {
 
     private String newPassword;
 
-
 }
