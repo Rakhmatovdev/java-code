@@ -45,8 +45,11 @@ public class BasketProductServiceImpl implements BasketProductService {
 
         BasketProduct saved = basketProductRepository.save(entity);
 
+        setBasketTotalPrice(crudDTO);
+
         return ApiResult.success(basketProductMapper.toDto(saved));
     }
+
 
     @Override
     public ApiResult<List<BasketProductDTO>> read() {
@@ -78,6 +81,8 @@ public class BasketProductServiceImpl implements BasketProductService {
 
         BasketProduct saved = basketProductRepository.save(basketProduct);
 
+        setBasketTotalPrice(crudDTO);
+
         return ApiResult.success(basketProductMapper.toDto(saved));
     }
 
@@ -108,6 +113,29 @@ public class BasketProductServiceImpl implements BasketProductService {
 
         basketProductRepository.deleteAllByBasketId(basket.getId());
 
+        basket.setTotalPrice(0.0);
+
+        basketRepository.save(basket);
+
         return ApiResult.success("Basket is cleaned !");
+    }
+
+
+    private void setBasketTotalPrice(BasketProductCrudDTO crudDTO) {
+
+        Basket updatedBasket = basketRepository.findByUserIdAndIsClosedFalse(crudDTO.getUserId()).orElseThrow();
+
+        List<BasketProduct> products = updatedBasket.getProducts();
+
+        Double totalPrice = 0.0;
+
+        for (BasketProduct basketProduct : products) {
+
+            totalPrice += basketProduct.getBuyingPrice();
+
+        }
+
+        updatedBasket.setTotalPrice(totalPrice);
+        basketRepository.save(updatedBasket);
     }
 }
