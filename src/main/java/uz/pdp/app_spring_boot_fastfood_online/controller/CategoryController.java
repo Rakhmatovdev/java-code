@@ -28,7 +28,6 @@ public class CategoryController {
         return categoryService.create(crudDTO);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping
     public ApiResult<List<CategoryDTO>> readAll() {
 
@@ -36,7 +35,6 @@ public class CategoryController {
         return categoryService.read();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @GetMapping("{id}")
     public ApiResult<CategoryDTO> readOne(@PathVariable Long id){
 

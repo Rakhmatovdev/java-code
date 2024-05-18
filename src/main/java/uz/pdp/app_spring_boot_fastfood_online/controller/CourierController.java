@@ -22,7 +22,7 @@ public class CourierController {
     private final CourierService courierService;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PostMapping("/create")
+    @PostMapping
     public ApiResult<CourierDTO> create(CourierCrudDTO crudDTO){
         log.info("Request to courier controller create; params {}", crudDTO);
         return  courierService.create(crudDTO);
@@ -30,28 +30,28 @@ public class CourierController {
 
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("/getCouriers")
+    @GetMapping
     public ApiResult<List<CourierDTO>> read(){
         log.info("Request to courier controller read method");
         return courierService.read();
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @GetMapping("/getOne/{id}")
+    @GetMapping("{id}")
     public ApiResult<CourierDTO> getOne(@PathVariable Long id){
         log.info("Request to courier controller getOne; params: {}", id);
        return courierService.readOne(id);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @PutMapping("/update/{id}")
-    public ApiResult<CourierDTO> edit(@Valid CourierCrudDTO crudDTO, @PathVariable Long id){
+    @PutMapping("{id}")
+    public ApiResult<CourierDTO> edit(@RequestBody CourierCrudDTO crudDTO, @PathVariable Long id){
         log.info("Request to courier controller update; params {}", crudDTO);
       return   courierService.update(id, crudDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ApiResult<String> delete(@PathVariable Long id){
         log.info("Request to courier controller delete; params: {}", id);
         return courierService.delete(id);
