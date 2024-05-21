@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Entity
+@Entity(name = "orders")
 public class Order extends AbsLongEntity {
 
     @ManyToOne
