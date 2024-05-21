@@ -14,8 +14,8 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(AppConstant.BASE_PATH_V1+"/basket-management")
-public class BasketManagementController {
+@RequestMapping(AppConstant.BASE_PATH_V1+"/basket")
+public class BasketController {
 
     private final BasketProductService basketProductService;
 
@@ -33,7 +33,7 @@ public class BasketManagementController {
         return basketProductService.getByBasketId(userId) ;
     }
 
-    @PutMapping("/update-basket-product/{userId}")
+    @PutMapping("/change-quantity/{userId}")
     public ApiResult<BasketProductDTO> updateBasketProduct( @RequestBody BasketProductCrudDTO crudDTO) {
 
         log.info("Request to basket-management/update-basket-product: {}", crudDTO);

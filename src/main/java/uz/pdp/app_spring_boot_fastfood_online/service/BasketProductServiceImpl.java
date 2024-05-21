@@ -40,8 +40,6 @@ public class BasketProductServiceImpl implements BasketProductService {
 
         entity.setBasket(basket);
         entity.setProduct(product);
-        entity.setProductName(product.getName());
-        entity.setBuyingPrice(product.getPrice());
 
         BasketProduct saved = basketProductRepository.save(entity);
 
@@ -131,7 +129,7 @@ public class BasketProductServiceImpl implements BasketProductService {
 
         for (BasketProduct basketProduct : products) {
 
-            totalPrice += basketProduct.getBuyingPrice();
+            totalPrice += basketProduct.getProduct().getPrice();
 
         }
 

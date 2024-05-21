@@ -11,13 +11,14 @@ import uz.pdp.app_spring_boot_fastfood_online.entity.templates.AbsLongEntity;
 @Setter
 @ToString
 @Entity
-public class BasketProduct extends AbsLongEntity {
+public class OrderProduct extends AbsLongEntity {
 
     @ManyToOne
     private Product product;
 
-    @ManyToOne
-    private Basket basket;
+    private String productName;
+
+    private Double buyingPrice;
 
     private int quantity = 1;
 

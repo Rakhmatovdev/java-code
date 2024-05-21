@@ -16,8 +16,6 @@ import java.io.Serializable;
 public class BasketProductDTO implements Serializable {
 
     private Long productId;
-    private String productName;
-    private Double buyingPrice;
     private Long basketId;
     private int quantity = 1;
 
